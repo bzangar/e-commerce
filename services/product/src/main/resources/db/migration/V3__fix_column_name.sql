@@ -1,0 +1,1 @@
+ALTER TABLE product RENAME COLUMN available_quanitity TO available_quantity;

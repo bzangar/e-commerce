@@ -1,0 +1,52 @@
+-- Добавляем категории с автогенерацией id
+INSERT INTO category (id, description, name)
+VALUES
+(nextval('category_seq'), 'Одежда для мужчин', 'Мужская одежда'),
+(nextval('category_seq'), 'Одежда для женщин', 'Женская одежда'),
+(nextval('category_seq'), 'Электроника и гаджеты', 'Электроника'),
+(nextval('category_seq'), 'Бытовая техника', 'Техника'),
+(nextval('category_seq'), 'Спортивные товары', 'Спорт');
+
+-- Добавляем товары с корректной категорией
+INSERT INTO product (id, description, name, available_quanitity, price, category_id)
+VALUES
+(nextval('product_seq'), 'Футболка хлопковая', 'Футболка Basic', 120, 4500.00,
+    (SELECT id FROM category WHERE name = 'Мужская одежда')),
+(nextval('product_seq'), 'Джинсы мужские синие', 'Джинсы Classic', 80, 15900.00,
+    (SELECT id FROM category WHERE name = 'Мужская одежда')),
+(nextval('product_seq'), 'Куртка демисезонная', 'Куртка Storm', 40, 24900.00,
+    (SELECT id FROM category WHERE name = 'Мужская одежда')),
+(nextval('product_seq'), 'Платье вечернее', 'Платье Elegant', 50, 32900.00,
+    (SELECT id FROM category WHERE name = 'Женская одежда')),
+(nextval('product_seq'), 'Блузка шелковая', 'Блузка Lux', 100, 18900.00,
+    (SELECT id FROM category WHERE name = 'Женская одежда')),
+(nextval('product_seq'), 'Юбка миди', 'Юбка Classic', 60, 14900.00,
+    (SELECT id FROM category WHERE name = 'Женская одежда')),
+(nextval('product_seq'), 'Смартфон Samsung A54', 'Samsung A54', 25, 299900.00,
+    (SELECT id FROM category WHERE name = 'Электроника')),
+(nextval('product_seq'), 'Смартфон iPhone 15', 'iPhone 15', 15, 499900.00,
+    (SELECT id FROM category WHERE name = 'Электроника')),
+(nextval('product_seq'), 'Наушники Bluetooth', 'AirBeats X', 75, 59900.00,
+    (SELECT id FROM category WHERE name = 'Электроника')),
+(nextval('product_seq'), 'Планшет Lenovo Tab', 'Lenovo Tab M10', 30, 229900.00,
+    (SELECT id FROM category WHERE name = 'Электроника')),
+(nextval('product_seq'), 'Пылесос Philips', 'Philips CleanPro', 40, 199900.00,
+    (SELECT id FROM category WHERE name = 'Техника')),
+(nextval('product_seq'), 'Микроволновка LG', 'LG SmartWave', 20, 279900.00,
+    (SELECT id FROM category WHERE name = 'Техника')),
+(nextval('product_seq'), 'Холодильник Samsung', 'Samsung FrostFree', 10, 799900.00,
+    (SELECT id FROM category WHERE name = 'Техника')),
+(nextval('product_seq'), 'Стиральная машина Bosch', 'Bosch CleanLine', 12, 899900.00,
+    (SELECT id FROM category WHERE name = 'Техника')),
+(nextval('product_seq'), 'Теннисная ракетка', 'Wilson Pro', 50, 99000.00,
+    (SELECT id FROM category WHERE name = 'Спорт')),
+(nextval('product_seq'), 'Футбольный мяч', 'Adidas Official', 120, 29000.00,
+    (SELECT id FROM category WHERE name = 'Спорт')),
+(nextval('product_seq'), 'Гантели по 5 кг', 'IronFit 5kg', 60, 49000.00,
+    (SELECT id FROM category WHERE name = 'Спорт')),
+(nextval('product_seq'), 'Коврик для йоги', 'YogaMat Comfort', 80, 25000.00,
+    (SELECT id FROM category WHERE name = 'Спорт')),
+(nextval('product_seq'), 'Куртка спортивная', 'Nike Windbreaker', 45, 159000.00,
+    (SELECT id FROM category WHERE name = 'Спорт')),
+(nextval('product_seq'), 'Кроссовки мужские', 'Nike AirRun', 70, 199000.00,
+    (SELECT id FROM category WHERE name = 'Спорт'));

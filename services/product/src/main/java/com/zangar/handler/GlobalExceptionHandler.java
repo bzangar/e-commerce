@@ -1,6 +1,7 @@
-package com.zangar.ecommerce.handler;
+package com.zangar.handler;
 
-import com.zangar.ecommerce.exception.CustomerNotFoundException;
+import com.zangar.exception.ProductPurchaseException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -13,10 +14,17 @@ import java.util.HashMap;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(CustomerNotFoundException.class)
-    public ResponseEntity<String> handle(CustomerNotFoundException exp){
+    @ExceptionHandler(ProductPurchaseException.class)
+    public ResponseEntity<String> handle(ProductPurchaseException exp){
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
+                .status(HttpStatus.BAD_REQUEST)
+                .body(exp.getMessage());
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handle(EntityNotFoundException exp){
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .body(exp.getMessage());
     }
 
@@ -29,9 +37,9 @@ public class GlobalExceptionHandler {
                     var errorMessage = error.getDefaultMessage();
                     errors.put(field, errorMessage);
                 });
+
         return ResponseEntity.
                 status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponse(errors));
-
     }
 }

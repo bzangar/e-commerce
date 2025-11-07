@@ -1,4 +1,4 @@
-package com.zangar.product.product;
+package com.zangar.product;
 
 import com.zangar.category.Category;
 import jakarta.persistence.*;
@@ -18,7 +18,7 @@ public class Product {
     private Integer id;
     private String name;
     private String description;
-    private double availableAmount;
+    private double availableQuantity;
     private BigDecimal price;
     @ManyToOne
     @JoinColumn(name = "category_id")

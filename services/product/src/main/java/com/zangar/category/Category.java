@@ -1,6 +1,6 @@
 package com.zangar.category;
 
-import com.zangar.product.product.Product;
+import com.zangar.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
