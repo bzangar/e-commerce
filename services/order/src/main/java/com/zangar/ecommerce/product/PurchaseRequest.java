@@ -2,7 +2,7 @@ package com.zangar.ecommerce.product;
 
 import jakarta.validation.constraints.*;
 
-public record PuschaseRequest(
+public record PurchaseRequest(
         @NotNull(message = "Product is mandatory")
         Integer productId,
 

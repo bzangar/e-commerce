@@ -1,4 +1,4 @@
-package com.zangar.ecommerce.order.customer;
+package com.zangar.ecommerce.customer;
 
 public record CustomerResponse(
         String id,

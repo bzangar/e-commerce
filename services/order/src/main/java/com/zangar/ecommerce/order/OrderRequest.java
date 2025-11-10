@@ -1,6 +1,6 @@
 package com.zangar.ecommerce.order;
 
-import com.zangar.ecommerce.product.PuschaseRequest;
+import com.zangar.ecommerce.product.PurchaseRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -26,6 +26,6 @@ public record OrderRequest(
         String customerId,
 
         @NotEmpty(message="You should purchase at least one product")
-        List<PuschaseRequest> products
+        List<PurchaseRequest> products
 ) {
 }
