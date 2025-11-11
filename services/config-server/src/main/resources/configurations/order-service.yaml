@@ -8,6 +8,13 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerialization
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: orderConfirmation:com.zangar.ecommerce.kafka.OrderConfirmation
 server:
   port: 8070
 
