@@ -1,11 +1,14 @@
 package com.zangar.ecommerce.order;
 
 import com.zangar.ecommerce.customer.CustomerClient;
+import com.zangar.ecommerce.customer.CustomerResponse;
 import com.zangar.ecommerce.exception.BusinessException;
 import com.zangar.ecommerce.kafka.OrderConfirmation;
 import com.zangar.ecommerce.kafka.OrderProducer;
 import com.zangar.ecommerce.orderline.OrderLineRequest;
 import com.zangar.ecommerce.orderline.OrderLineService;
+import com.zangar.ecommerce.payment.PaymentClient;
+import com.zangar.ecommerce.payment.PaymentRequest;
 import com.zangar.ecommerce.product.ProductClient;
 import com.zangar.ecommerce.product.PurchaseRequest;
 import jakarta.persistence.EntityNotFoundException;
@@ -26,6 +29,7 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     public Integer createOrder(@Valid OrderRequest request) {
         // check the customer --> OpenFeign
@@ -52,6 +56,13 @@ public class OrderService {
 
 
         // todo start payment process
+        paymentClient.requestPayment(new PaymentRequest( // sending POST request to payment microservice to create Payment
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        ));
 
         // send the order confirmation --> notification-ms (kafka)
         orderProducer.sendOrderConfirmation(new OrderConfirmation(
