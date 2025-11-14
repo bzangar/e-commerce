@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductClient {
 
     @Value("${application.config.product-url}")
-    private final String productUrl;
+    private String productUrl;
     private final RestTemplate restTemplate;
 
     public List<PurchaseResponse> purchaseProducts(List<PurchaseRequest> requests){

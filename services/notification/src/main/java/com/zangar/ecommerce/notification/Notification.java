@@ -1,7 +1,7 @@
 package com.zangar.ecommerce.notification;
 
 import com.zangar.ecommerce.kafka.order.OrderConfirmation;
-import com.zangar.ecommerce.kafka.payment.PaymentConfirmation;
+import com.zangar.ecommerce.kafka.payment.PaymentNotificationRequest;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,5 +22,5 @@ public class Notification {
     private NotificationType notificationType;
     private LocalDateTime notificationDate;
     private OrderConfirmation orderConfirmation;
-    private PaymentConfirmation paymentConfirmation;
+    private PaymentNotificationRequest paymentNotificationRequest;
 }

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Order Confirmation</title>
+
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f8f9fa;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 650px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 8px;
+        padding: 25px;
+        border: 1px solid #e5e5e5;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        text-align: left;
+        background-color: #f1f1f1;
+    }
+
+    .total {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: right;
+        padding-top: 10px;
+    }
+
+    .footer {
+        margin-top: 25px;
+        font-size: 12px;
+        color: #777;
+        text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <h2>Order Confirmation</h2>
+
+  <p>Hello <strong th:text="${customerName}">Customer</strong>,</p>
+
+  <p>Your order has been successfully received!</p>
+
+  <p>Order reference:
+    <strong th:text="${orderReference}">ABC-123</strong>
+  </p>
+
+  <h3>Products</h3>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price (per unit)</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="product : ${products}">
+      <td th:text="${product.name}">Product name</td>
+      <td th:text="${product.quantity}">1</td>
+      <td th:text="${product.price}">0.00</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p class="total">
+    Total: <span th:text="${totalAmount}">0.00</span>
+  </p>
+
+  <div class="footer">
+    &copy; 2025 Zangar Ecommerce. All rights reserved.
+  </div>
+
+</div>
+</body>
+</html>

@@ -2,7 +2,7 @@ package com.zangar.ecommerce.kafka;
 
 import com.zangar.ecommerce.email.EmailService;
 import com.zangar.ecommerce.kafka.order.OrderConfirmation;
-import com.zangar.ecommerce.kafka.payment.PaymentConfirmation;
+import com.zangar.ecommerce.kafka.payment.PaymentNotificationRequest;
 import com.zangar.ecommerce.notification.Notification;
 import com.zangar.ecommerce.notification.NotificationRepository;
 import com.zangar.ecommerce.notification.NotificationType;
@@ -23,22 +23,22 @@ public class NotificationConsumer {
     private final EmailService emailService;
 
     @KafkaListener(topics = "payment-topic")
-    public void sendPaymentSuccesNotification(PaymentConfirmation paymentConfirmation) throws MessagingException {
+    public void sendPaymentSuccesNotification(PaymentNotificationRequest paymentNotificationRequest) throws MessagingException {
         log.info("Consuming payment confirmation from payment-topic");
         notificationRepository.save(
                 Notification.builder()
                         .notificationType(NotificationType.PAYMENT_CONFIRMATION)
                         .notificationDate(LocalDateTime.now())
-                        .paymentConfirmation(paymentConfirmation)
+                        .paymentNotificationRequest(paymentNotificationRequest)
                         .build()
         );
 
         // todo sending to email
-        String customerName = paymentConfirmation.customerFirstName() + " " + paymentConfirmation.customerLastName();
-        emailService.sendPaymentSuccesEmail(paymentConfirmation.customerEmail(),
+        String customerName = paymentNotificationRequest.customerFirstName() + " " + paymentNotificationRequest.customerLastName();
+        emailService.sendPaymentSuccesEmail(paymentNotificationRequest.customerEmail(),
                 customerName,
-                paymentConfirmation.amount(),
-                paymentConfirmation.orderReference());
+                paymentNotificationRequest.amount(),
+                paymentNotificationRequest.orderReference());
     }
 
     @KafkaListener(topics = "order-topic")
