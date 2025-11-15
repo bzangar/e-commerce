@@ -37,8 +37,8 @@ public class ProductService {
 
         var storedRequest = request
                 .stream()
-                .sorted(Comparator.comparing(ProductPurchaseRequest::productId))
-                .toList();
+//                .sorted(Comparator.comparing(ProductPurchaseRequest::productId))
+                .collect(Collectors.toMap(ProductPurchaseRequest::productId, r -> r));
         var purchasedProducts = new ArrayList<ProductPurchaseResponse>();
 
         for(Product product: storedProducts){
